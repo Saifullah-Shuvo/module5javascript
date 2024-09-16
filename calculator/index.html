@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h2 class="text-center">Simple Calculator</h2>
+        <div class="form-group">
+            <label for="number1">Number 1</label>
+            <input type="number" id="number1" class="form-control" placeholder="Enter first number">
+        </div>
+        <div class="form-group">
+            <label for="number2">Number 2</label>
+            <input type="number" id="number2" class="form-control" placeholder="Enter second number">
+        </div>
+        <div class="form-group">
+            <label for="operation">Operation</label>
+            <select id="operation" class="form-control">
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (*)</option>
+                <option value="/">Division (/)</option>
+            </select>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="calculate()">Calculate</button>
+        <div id="result" class="result text-center"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('number1').value);
+            const num2 = parseFloat(document.getElementById('number2').value);
+            const operation = document.getElementById('operation').value;
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDiv.textContent = 'Please enter valid numbers.';
+                return;
+            }
+
+            let result;
+            switch (operation) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        resultDiv.textContent = 'Cannot divide by zero.';
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    resultDiv.textContent = 'Invalid operation.';
+                    return;
+            }
+
+            resultDiv.textContent = `Result: ${result}`;
+        }
+    </script>
+</body>
+</html>
